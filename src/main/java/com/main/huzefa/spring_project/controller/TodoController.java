@@ -45,6 +45,12 @@ public class TodoController {
 		return "display-todo";
 	}
 	
+	@RequestMapping(value = "/Delete-Todo", method = RequestMethod.GET)
+	public String deleteTodo(@RequestParam String id,ModelMap model){
+		todoService.deleteTodo(Integer.parseInt(id));
+		return "redirect:/Display-All-Todos";
+	}
+	
 	
 
 	@RequestMapping("/home")
@@ -55,6 +61,7 @@ public class TodoController {
 		}
 		return "index";
 	}
+	
 	
 
 }
