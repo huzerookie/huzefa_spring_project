@@ -11,6 +11,5 @@
 <h1>Welcome ${username }!!!</h1>
 <a href="${pathContext.request.contextPath }/Add-Todo">Add Todo</a><br>
 <a href="${pathContext.request.contextPath }/Display-All-Todos">Display All Todos</a><br>
-<a href="${pathContext.request.contextPath }/Delete-Todo">Delete Todo</a><br>
 </body>
 </html>

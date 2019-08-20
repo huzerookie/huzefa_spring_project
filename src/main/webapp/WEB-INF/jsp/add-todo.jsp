@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"%>
  <%@ include file="/WEB-INF/predefined/date-calender.html" %>  
- <%@ include file="/WEB-INF/predefined/show-user.html" %>     
+ <%@ include file="/WEB-INF/predefined/show-user.html" %>
+ <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="s"%>     
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,15 +16,17 @@
 
 
 
-
-<form method="post">
-Desc:<input type="text" name="desc" required/><br><br>
+<!-- s indicates spring commandBean -->
+<s:form method="post" modelAttribute="todo">
+<s:label path="desc">Desc:</s:label>
+<s:input path="desc" type="text" name="desc" required="required"/><br><br>
 
 <div id="message_print"></div>
 <div id="holder"></div>
-Date:<input type="text" id="datepicker1" name="datepicker" required>	<br>
+<s:label path="targetDate">Date:</s:label>
+<s:input path="targetDate" type="text" id="datepicker1" name="datepicker" required="required"/>	<br>
 <input type="submit" value="Submit"/>
-</form>
+</s:form>
 
 
 <!-- <script>

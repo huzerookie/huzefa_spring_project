@@ -47,4 +47,18 @@ public class TodoService {
 			}
 		}
 	}
+	
+	public void updateTodo(Todo todoNew) {
+		Iterator<Todo> iterator = todos.iterator();
+		while (iterator.hasNext()) {
+			Todo todo = iterator.next();
+			if (todo.getId() == todoNew.getId()) {
+				iterator.remove();
+				todos.add(todoNew);
+			}
+		}
+	}
+	
+	
+	
 }
