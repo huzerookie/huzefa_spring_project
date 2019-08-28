@@ -1,11 +1,15 @@
 package com.main.huzefa.spring_project.controller;
 
 import java.text.ParseException;
+import java.util.Date;
+
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.util.StringUtils;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -23,14 +27,14 @@ public class TodoController {
 
 	@RequestMapping(value = "/Add-Todo", method = RequestMethod.GET)
 	public String routeAddTodo(ModelMap model) {
-		model.addAttribute("todo", new Todo(0,(String)model.get("username"),"",null,false));
+		model.addAttribute("todo", new Todo(0,(String)model.get("username"),"",new Date(),false));
 		System.out.println(model.get("username"));
 		return "add-todo";
 	}
 
 	@RequestMapping(value = "/Add-Todo", method = RequestMethod.POST)
 //	public String addTodo(@RequestParam String desc, @RequestParam String datepicker, ModelMap model)
-	public String addTodo(Todo todo, ModelMap model)
+	public String addTodo(ModelMap model, @Valid Todo todo, BindingResult result)
 			throws ParseException {
 		//System.out.println("In addtodo post method:\ndesc:" + desc + "----" + "date:" + datepicker);
 		todoService.addTodo((String) model.get("username"), todo.getDesc(), todo.getTargetDate(),false); 
@@ -53,6 +57,22 @@ public class TodoController {
 		return "redirect:/Display-All-Todos";
 	}
 	
+	@RequestMapping(value = "/Update-Todo", method = RequestMethod.GET)
+	public String updatePageTodo(Todo todo, ModelMap model){
+		todo.setTargetDate(new Date());
+		model.addAttribute("todo", todo);
+		return "add-todo";
+	}
+	
+	@RequestMapping(value = "/Update-Todo", method = RequestMethod.POST)
+	public String updateTodoDisplay(ModelMap model, @Valid Todo todo, BindingResult result){
+		System.out.println("todo.getId():"+todo.getId());
+		todo.setUser((String)model.get("username"));
+		if(result.hasErrors())
+			return "add-todo";
+		todoService.updateTodo(todo);
+		return "redirect:/Display-All-Todos";
+	}
 	
 
 	@RequestMapping("/home")

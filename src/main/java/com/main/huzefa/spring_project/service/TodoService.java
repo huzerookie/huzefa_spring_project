@@ -29,7 +29,11 @@ public class TodoService {
 		}
 		return filteredTodos;
 	}
-
+	
+	public Todo retrieveSingleTodo(int id) {
+		return (Todo)todos.stream().filter(c->c.getId()==id).findAny().orElse(null);
+	}
+	
 	public boolean addTodo(String name, String desc, Date targetDate, boolean isDone) {
 		Date date = new Date();
 		System.out.println(targetDate+"------"+date+"------"+targetDate.compareTo(date));
@@ -50,11 +54,15 @@ public class TodoService {
 	
 	public void updateTodo(Todo todoNew) {
 		Iterator<Todo> iterator = todos.iterator();
+		System.out.println("todonew:"+todoNew);
 		while (iterator.hasNext()) {
-			Todo todo = iterator.next();
-			if (todo.getId() == todoNew.getId()) {
+			
+			if (iterator.next().getId() == todoNew.getId()) {
 				iterator.remove();
 				todos.add(todoNew);
+				break;
+				
+				
 			}
 		}
 	}

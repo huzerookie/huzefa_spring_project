@@ -3,6 +3,7 @@
  <%@ include file="/WEB-INF/predefined/date-calender.html" %>  
  <%@ include file="/WEB-INF/predefined/show-user.html" %>
  <%@ taglib uri="http://www.springframework.org/tags/form"  prefix="s"%>     
+ <%@taglib uri="http://java.sun.com/jsp/jstl/fmt"  prefix="c"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,13 +19,16 @@
 
 <!-- s indicates spring commandBean -->
 <s:form method="post" modelAttribute="todo">
+<s:hidden path="id"/>
 <s:label path="desc">Desc:</s:label>
 <s:input path="desc" type="text" name="desc" required="required"/><br><br>
 
 <div id="message_print"></div>
 <div id="holder"></div>
 <s:label path="targetDate">Date:</s:label>
-<s:input path="targetDate" type="text" id="datepicker1" name="datepicker" required="required"/>	<br>
+<c:formatDate value="${todo.getTargetDate()}" var="tDate" pattern="MM/dd/yyyy"/>
+
+<s:input path="targetDate" value="${tDate}" type="text" id="datepicker1" name="datepicker" required="required"/>	<br>
 <input type="submit" value="Submit"/>
 </s:form>
 
