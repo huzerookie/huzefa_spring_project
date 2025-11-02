@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,7 +25,7 @@ public class TodoController {
 		this.todoService=todoService;
 	}
 	
-	
+	@GetMapping
 	public ResponseEntity<List<Todo>> findAllTodo(){
 		return ResponseEntity.ok(todoService.findAllTodos());
 	}
@@ -34,10 +35,11 @@ public class TodoController {
 		return ResponseEntity.ok(todoService.findTodoById(id));
 	}
 	
+	@PostMapping
 	public ResponseEntity<Todo> addTodo(@RequestBody Todo todo){
 		Todo newTodo = todoService.addTodo(todo);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newTodo.getId()).toUri();
-		return ResponseEntity.created(location).build();
+		return ResponseEntity.created(location).body(newTodo);
 	}
 	
 	@DeleteMapping("/{id}")
@@ -47,7 +49,7 @@ public class TodoController {
 	}
 	
 	@PutMapping
-	public ResponseEntity<Todo> updateTodoById(@RequestBody Todo todo){
+	public ResponseEntity<Todo> updateTodo(@RequestBody Todo todo){
 		return ResponseEntity.ok(todoService.updateTodo(todo));
 	}
 	

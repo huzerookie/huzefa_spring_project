@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.IntStream;
 
 import org.springframework.stereotype.Service;
 
@@ -15,15 +16,7 @@ import com.main.huzefa.spring_project.bean.Todo;
 	    private static int todoCount = 0;
 
 	    static {
-	        todos.add(new Todo(++todoCount,  "Learn Spring MVC", "Huzefa",LocalDate.now().plusYears(1)));
-	        todos.add(new Todo(++todoCount,  "Learn Spring MVC", "Huzefa",LocalDate.now().plusYears(1)));
-	        todos.add(new Todo(++todoCount,  "Learn Spring MVC", "Huzefa",LocalDate.now().plusYears(1)));
-	        todos.add(new Todo(++todoCount,  "Learn Spring MVC", "Huzefa",LocalDate.now().plusYears(1)));
-	        todos.add(new Todo(++todoCount,  "Learn Spring MVC", "Huzefa",LocalDate.now().plusYears(1)));
-	        todos.add(new Todo(++todoCount,  "Learn Spring MVC", "Huzefa",LocalDate.now().plusYears(1)));
-	        todos.add(new Todo(++todoCount,  "Learn Spring MVC", "Huzefa",LocalDate.now().plusYears(1)));
-	        todos.add(new Todo(++todoCount,  "Learn Spring MVC", "Huzefa",LocalDate.now().plusYears(1)));
-
+	    	IntStream.range(0, 10).forEach(e->todos.add(new Todo(++todoCount,  "Learn Spring MVC", "Huzefa",LocalDate.now().plusYears(e).toString())));
 	    }
 
 	    public List<Todo> findAllTodos() {
@@ -33,6 +26,7 @@ import com.main.huzefa.spring_project.bean.Todo;
 	    public Todo addTodo(Todo todo) {
 	    	todo.setId(++todoCount);
 	        todos.add(todo);
+	        System.out.println(todo.toString());
 	        return todo;
 	    }
 
