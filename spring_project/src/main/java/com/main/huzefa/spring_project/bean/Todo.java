@@ -1,53 +1,42 @@
 package com.main.huzefa.spring_project.bean;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class Todo {
-
 	private int id;
-    private String user;
-    private String desc;
-    private Date targetDate;
-    private boolean isDone;
+	private String course;
+	private String candidateName;
+	private LocalDate deadline;
 	public int getId() {
 		return id;
 	}
 	public void setId(int id) {
 		this.id = id;
 	}
-	public String getUser() {
-		return user;
+	public String getCourse() {
+		return course;
 	}
-	public void setUser(String user) {
-		this.user = user;
+	public void setCourse(String course) {
+		this.course = course;
 	}
-	public String getDesc() {
-		return desc;
+	public String getCandidateName() {
+		return candidateName;
 	}
-	public void setDesc(String desc) {
-		this.desc = desc;
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
 	}
-	public Date getTargetDate() {
-		return targetDate;
+	public LocalDate getDeadline() {
+		return deadline;
 	}
-	public void setTargetDate(Date targetDate) {
-		this.targetDate = targetDate;
+	public void setDeadline(LocalDate deadline) {
+		this.deadline = deadline;
 	}
-	public boolean isDone() {
-		return isDone;
-	}
-	public void setDone(boolean isDone) {
-		this.isDone = isDone;
-	}
-	public Todo(int id, String user, String desc, Date targetDate, boolean isDone) {
+	public Todo(int id, String course, String candidateName, LocalDate deadline) {
 		super();
 		this.id = id;
-		this.user = user;
-		this.desc = desc;
-		this.targetDate = targetDate;
-		this.isDone = isDone;
+		this.course = course;
+		this.candidateName = candidateName;
+		this.deadline = deadline;
 	}
-    
-    
-    
+	
 }
